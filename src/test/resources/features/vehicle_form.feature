@@ -5,16 +5,16 @@ Feature: Vehicle Form
   Scenario Outline: Fill vehicle form and move to the next step
     Given User is at the "Vehicle" form
     When User chooses brand "<brand>"
-#    And User enters the "<engine_performance>"
-#    And User enters the "<date_of_manufacture>"
-#    And User picks the "<number_of_seats>"
+    And User enters the engine performance "<engine_performance>"
+    And User enters the date of manufacture "<date_of_manufacture>"
+    And User picks the number of seats "<number_of_seats>"
 #    And User chooses "<right_hand>" drive
-#    And User chooses "<fuel_type>"
-#    And User enters "<payload>"
-#    And User enters "<total_weight>"
-#    And User enters "<list_price>"
+    And User chooses the fuel type "<fuel_type>"
+    And User enters the payload "<payload>"
+    And User enters the total weight "<total_weight>"
+    And User enters the list price "<list_price>"
 #    And User enters "<plate>" number
-#    And User enters "<annual_mileage>"
+    And User enters the annual mileage "<annual_mileage>"
     And User goes to the "Insurant" form
     Then User is redirected to the "Insurant" form
 

@@ -28,18 +28,63 @@ public class QuoteSteps {
         vehicleFormPage.goToVehiclePage();
     }
 
+    @After
+    public void tearDown() {
+        webDriver.close();
+    }
+
     @Given("User is at the {string} form")
-    public void user_is_at_page(String page) {
-        isAtPage(page);
+    public void userIsAtPage(String page) {
+        assert isAtPage(page);
     }
 
     @When("User chooses brand {string}")
-    public void user_chooses_brand(String brand) {
+    public void userChoosesBrand(String brand) {
         vehicleFormPage.pickBrand(brand);
     }
 
+    @And("User enters the engine performance {string}")
+    public void userEntersTheEnginePerformance(String performance) {
+        vehicleFormPage.setEnginePerformance(performance);
+    }
+
+    @And("User enters the date of manufacture {string}")
+    public void userEntersTheDateOfManufacture(String date) {
+        vehicleFormPage.setDateOfManufacture(date);
+    }
+
+    @And("User picks the number of seats {string}")
+    public void userPicksTheNumberOfSeats(String quantity) {
+        vehicleFormPage.pickNumberOfSeatsMenu(quantity);
+    }
+
+    @And("User chooses the fuel type {string}")
+    public void userChoosesTheFuelType(String type) {
+        vehicleFormPage.pickFuelType(type);
+    }
+
+    @And("User enters the payload {string}")
+    public void userEntersThePayload(String payload) {
+        vehicleFormPage.setPayload(payload);
+    }
+
+    @And("User enters the total weight {string}")
+    public void userEntersTheTotalWeight(String weight) {
+        vehicleFormPage.setTotalWeight(weight);
+    }
+
+    @And("User enters the list price {string}")
+    public void userEntersTheListPrice(String price) {
+        vehicleFormPage.setListPrice(price);
+    }
+
+    @And("User enters the annual mileage {string}")
+    public void userEntersTheAnnualMileage(String mileage) {
+        vehicleFormPage.setAnnualMileage(mileage);
+    }
+
     @And("User goes to the {string} form")
-    public void user_goes_to_the_next_form(String page) {
+    public void userGoesToTheNextForm(String page) {
         switch (page) {
             case "Insurant":
                 vehicleFormPage.goToTheNextPage();
@@ -48,7 +93,7 @@ public class QuoteSteps {
     }
 
     @Then("User is redirected to the {string} form")
-    public void user_is_redirected_to_the_next_form(String page) {
+    public void userIsRedirectedToTheNextForm(String page) {
         assert isAtPage(page);
     }
 
@@ -61,10 +106,5 @@ public class QuoteSteps {
             default:
                 return false;
         }
-    }
-
-    @After
-    public void tearDown() {
-        webDriver.close();
     }
 }

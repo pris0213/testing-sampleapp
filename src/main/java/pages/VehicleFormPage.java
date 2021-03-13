@@ -55,6 +55,38 @@ public class VehicleFormPage extends BasePage {
         makeSelect.selectByValue(brand);
     }
 
+    public void setEnginePerformance(String performance) {
+        enginePerformanceInput.sendKeys(performance);
+    }
+
+    public void setDateOfManufacture(String date) {
+        dateOfManufactureInput.sendKeys(date);
+    }
+    public void pickNumberOfSeatsMenu(String quantity) {
+        Select numberOfSeatsSelect = new Select(numberOfSeatsMenu);
+        numberOfSeatsSelect.selectByValue(quantity);
+    }
+    public void pickFuelType(String type) {
+        Select fuelSelect = new Select(fuelMenu);
+        fuelSelect.selectByValue(type);
+    }
+
+    public void setPayload(String payload) {
+        payloadInput.sendKeys(payload);
+    }
+
+    public void setTotalWeight(String weight) {
+        totalWeightInput.sendKeys(weight);
+    }
+
+    public void setListPrice(String price) {
+        listPriceInput.sendKeys(price);
+    }
+
+    public void setAnnualMileage(String mileage) {
+        annualMileageInput.sendKeys(mileage);
+    }
+
     public void goToTheNextPage() {
         nextBtn.click();
     }
