@@ -12,7 +12,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import pages.InsurantFormPage;
 import pages.PricePage;
 import pages.ProductFormPage;
-import pages.SendQuotePage;
+import pages.QuotePage;
 import pages.VehicleFormPage;
 
 import static constants.QuoteConstants.INSURANT;
@@ -27,18 +27,19 @@ public class QuoteSteps {
     public static InsurantFormPage insurantFormPage;
     public static ProductFormPage productFormPage;
     public static PricePage pricePage;
-    public static SendQuotePage sendQuotePage;
+    public static QuotePage quotePage;
 
     @Before("@FirstScenario")
     public static void setUp() {
         ChromeDriverManager.getInstance().setup();
         webDriver = new ChromeDriver();
+        webDriver.manage().window().maximize();
 
         vehicleFormPage = new VehicleFormPage(webDriver, "Enter Vehicle Data");
         insurantFormPage = new InsurantFormPage(webDriver, "Enter Insurant Data");
         productFormPage = new ProductFormPage(webDriver, "Enter Product Data");
         pricePage = new PricePage(webDriver, "Select Price Option");
-        sendQuotePage = new SendQuotePage(webDriver, "Send Quote");
+        quotePage = new QuotePage(webDriver, "Send Quote");
     }
 
     @After("@LastScenario")
@@ -49,8 +50,9 @@ public class QuoteSteps {
     /* Common Steps */
     @Given("User is at the {string} form")
     public void userIsAtPage(String page) {
-        if (page.equals(VEHICLE))
+        if (page.equals(VEHICLE)) {
             vehicleFormPage.goToVehiclePage();
+        }
 
         assert isAtPage(page);
     }
@@ -68,6 +70,7 @@ public class QuoteSteps {
                 productFormPage.goToTheNextPage();
                 break;
             case QUOTE:
+                pricePage.goToTheNextPage();
                 break;
         }
     }
@@ -83,6 +86,16 @@ public class QuoteSteps {
         vehicleFormPage.pickBrand(brand);
     }
 
+    @When("User chooses the model {string}")
+    public void userChoosesTheModel(String model) {
+        vehicleFormPage.pickModel(model);
+    }
+
+    @When("User chooses the cylinder capacity {string}")
+    public void userChoosesTheCylinderCapacity(String capacity) {
+        vehicleFormPage.setCylinderCapacity(capacity);
+    }
+
     @And("User enters the engine performance {string}")
     public void userEntersTheEnginePerformance(String performance) {
         vehicleFormPage.setEnginePerformance(performance);
@@ -96,6 +109,11 @@ public class QuoteSteps {
     @And("User picks the number of seats {string}")
     public void userPicksTheNumberOfSeats(String quantity) {
         vehicleFormPage.pickNumberOfSeatsMenu(quantity);
+    }
+
+    @And("User picks the number of seats for motorcycle {string}")
+    public void userPicksTheNumberOfSeatsForMotorcycle(String quantity) {
+        vehicleFormPage.pickNumberOfSeatsForMotorcycleMenu(quantity);
     }
 
     @And("User chooses the fuel type {string}")
@@ -170,6 +188,11 @@ public class QuoteSteps {
         productFormPage.pickInsuranceSum(sum);
     }
 
+    @And("User picks the merit rating {string}")
+    public void userPicksTheMeritRating(String rate) {
+        productFormPage.pickMeritRating(rate);
+    }
+
     @And("User enters the damage insurance {string}")
     public void userEntersTheDamageInsurance(String damageInsurance) {
         productFormPage.pickDamageInsurance(damageInsurance);
@@ -180,6 +203,11 @@ public class QuoteSteps {
         productFormPage.pickEuroProtectionAsAnOptionalProduct();
     }
 
+    @And("User picks if they want a courtesy car {string}")
+    public void userPicksIfTheyWantACourtesyCar(String courtesyCar) {
+        productFormPage.pickCourtesyCar(courtesyCar);
+    }
+
     /* Price Steps */
     @When("User picks the price option {string}")
     public void userPicksThePriceOption(String price) {
@@ -187,6 +215,37 @@ public class QuoteSteps {
     }
 
     /* Send Quote Steps */
+    @When("User enters their email address {string}")
+    public void userEntersTheirEmailAddress(String email) {
+        quotePage.setEmailInput(email);
+
+    }
+
+    @And("User enters their username {string}")
+    public void userEntersTheirUsername(String username) {
+        quotePage.setUsernameInput(username);
+    }
+
+    @And("User enters their password {string}")
+    public void userEntersTheirPassword(String password) {
+        quotePage.setPasswordInput(password);
+    }
+
+    @And("User confirms their password {string}")
+    public void userConfirmsTheirPassword(String password) {
+        quotePage.setConfirmPasswordInput(password);
+    }
+
+    @And("User sends the quote")
+    public void userSendsTheQuote() {
+        quotePage.sendQuote();
+    }
+
+    @Then("A confirmation message is displayed")
+    public void aConfirmationMessageIsDisplayed() {
+//        quotePage.isConfirmationAlertVisible();
+        assert quotePage.isEmailSent();
+    }
 
     /* Class methods */
     private boolean isAtPage(String page) {
@@ -200,7 +259,7 @@ public class QuoteSteps {
             case PRICE:
                 return pricePage.isAtPage();
             case QUOTE:
-                return insurantFormPage.isAtPage();
+                return quotePage.isAtPage();
             default:
                 return false;
         }

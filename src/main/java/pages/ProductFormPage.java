@@ -1,5 +1,6 @@
 package pages;
 
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -14,8 +15,12 @@ public class ProductFormPage extends BasePage {
     private WebElement insuranceSumMenu;
     @FindBy(id = "damageinsurance")
     private WebElement damageInsuranceMenu;
-    @FindBy(css = "#insurance-form > div > section:nth-child(3) > div.field.idealforms-field.idealforms-field-checkbox.invalid > p > label:nth-child(1)")
+    @FindBy(id = "meritrating")
+    private WebElement meritRatingMenu;
+    @FindBy(css = ".idealsteps-wrap > section:nth-child(3) > div:nth-child(5) > p > label:nth-child(1)")
     private WebElement euroProtectionCheckBox;
+    @FindBy(id = "courtesycar")
+    private WebElement courtesyCarMenu;
     @FindBy(id = "nextselectpriceoption")
     private WebElement nextBtn;
 
@@ -40,8 +45,20 @@ public class ProductFormPage extends BasePage {
         damageInsuranceSelect.selectByValue(damageInsurance);
     }
 
+    public void pickMeritRating(String rate) {
+        wait.until(ExpectedConditions.visibilityOf(meritRatingMenu));
+        Select meritRatingSelect = new Select(meritRatingMenu);
+        meritRatingSelect.selectByValue(rate);
+    }
+
     public void pickEuroProtectionAsAnOptionalProduct() {
         euroProtectionCheckBox.click();
+    }
+
+    public void pickCourtesyCar(String choice) {
+        wait.until(ExpectedConditions.visibilityOf(courtesyCarMenu));
+        Select courtesyCarSelect = new Select(courtesyCarMenu);
+        courtesyCarSelect.selectByValue(choice);
     }
 
     public void goToTheNextPage() {

@@ -5,9 +5,12 @@ Feature: Send Quote
   Scenario Outline: Fill vehicle form and move to the next step
     Given User is at the "Vehicle" form
     When User chooses brand "<brand>"
+    When User chooses the model "<model>"
+    When User chooses the cylinder capacity "<cylinder_capacity>"
     And User enters the engine performance "<engine_performance>"
     And User enters the date of manufacture "<date_of_manufacture>"
     And User picks the number of seats "<number_of_seats>"
+    And User picks the number of seats for motorcycle "<number_of_seats_motorcycle>"
     And User chooses the fuel type "<fuel_type>"
     And User enters the payload "<payload>"
     And User enters the total weight "<total_weight>"
@@ -17,14 +20,14 @@ Feature: Send Quote
     Then User is redirected to the "Insurant" form
 
     Examples:
-    | brand         | engine_performance | date_of_manufacture | number_of_seats | fuel_type      | payload | total_weight | list_price | annual_mileage |
-    | Mercedes Benz | 10                 | 03/02/2021          | 2               | Electric Power | 100     | 500          | 1000       | 10             |
+    | brand         | model   | cylinder_capacity | engine_performance | date_of_manufacture | number_of_seats | number_of_seats_motorcycle | fuel_type      | payload | total_weight | list_price | annual_mileage |
+    | Mercedes Benz | Scooter | 10                | 10                 | 03/02/2021          | 2               | 1                          | Electric Power | 100     | 500          | 1000       | 1000           |
 
   @Functional
   Scenario Outline: Fill insurant form and move to the next step
     Given User is at the "Insurant" form
     When User enters their first name "<first_name>"
-    When User enters their last name "<last_name>"
+    And User enters their last name "<last_name>"
     And User enters their date of birth "<dob>"
     And User picks their country "<country>"
     And User enters their zip code "<zipcode>"
@@ -41,15 +44,17 @@ Feature: Send Quote
   Scenario Outline: Fill product form and move to the next step
     Given User is at the "Product" form
     When User enters the start date "<start_date>"
-    When User enters the insurance sum "<insurance_sum>"
+    And User enters the insurance sum "<insurance_sum>"
+    And User picks the merit rating "<merit_rating>"
     And User enters the damage insurance "<damage_insurance>"
     And User picks an optional product "<optional_product>"
+    And User picks if they want a courtesy car "<courtesy_car>"
     And User goes to the "Price" form
     Then User is redirected to the "Price" form
 
     Examples:
-      | start_date | insurance_sum | damage_insurance | optional_product |
-      | 12/14/2021 | 3000000       | Full Coverage    | Euro Protection  |
+      | start_date | insurance_sum | merit_rating  | damage_insurance | optional_product | courtesy_car |
+      | 12/14/2021 | 3000000       | Bonus 1       | Full Coverage    | Euro Protection  | No           |
 
   @Functional
   Scenario Outline: Pick price option and move to the next step
@@ -62,16 +67,16 @@ Feature: Send Quote
       | price |
       | Gold  |
 
-#  @Functional @LastScenario
-#  Scenario Outline: Fill product form and move to the next step
-#    Given User is at the "Product" form
-##    When User enters the start date "<start_date>"
-#    When User enters the insurance sum "<insurance_sum>"
-#    And User enters the damage insurance "<damage_insurance>"
-#    And User picks an optional product "<optional_product>"
-#    And User goes to the "Product" form
-#    Then User is redirected to the "Product" form
-#
-#    Examples:
-#      | start_date | insurance_sum | damage_insurance | optional_product |
-#      | 14/12/2021 | 3000000       | Full Coverage    | Euro Protection  |
+  @Functional @LastScenario
+  Scenario Outline: Fill quote form and send quote
+    Given User is at the "Quote" form
+    When User enters their email address "<email>"
+    And User enters their username "<username>"
+    And User enters their password "<password>"
+    And User confirms their password "<password>"
+    And User sends the quote
+    Then A confirmation message is displayed
+
+    Examples:
+      | email            | username      | password   |
+      | desmond@lost.com | desmond       | Hume42     |

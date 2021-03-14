@@ -14,12 +14,18 @@ import static constants.QuoteConstants.QUOTE_URL;
 public class VehicleFormPage extends BasePage {
     @FindBy(id = "make")
     private WebElement makeMenu;
+    @FindBy(id = "model")
+    private WebElement modelMenu;
+    @FindBy(id = "cylindercapacity")
+    private WebElement cylinderCapacityInput;
     @FindBy(id = "engineperformance")
     private WebElement enginePerformanceInput;
     @FindBy(id = "dateofmanufacture")
     private WebElement dateOfManufactureInput;
     @FindBy(id = "numberofseats")
     private WebElement numberOfSeatsMenu;
+    @FindBy(id = "numberofseatsmotorcycle")
+    private WebElement numberOfSeatsForMotorcycleMenu;
     @FindBy(id = "righthanddriveyes")
     private WebElement rightHandDriverYesRadioBtn;
     @FindBy(id = "righthanddriveno")
@@ -55,6 +61,16 @@ public class VehicleFormPage extends BasePage {
         makeSelect.selectByValue(brand);
     }
 
+    public void pickModel(String model) {
+        wait.until(ExpectedConditions.visibilityOf(modelMenu));
+        Select modelSelect = new Select(modelMenu);
+        modelSelect.selectByValue(model);
+    }
+
+    public void setCylinderCapacity(String capacity) {
+        cylinderCapacityInput.sendKeys(capacity);
+    }
+
     public void setEnginePerformance(String performance) {
         enginePerformanceInput.sendKeys(performance);
     }
@@ -62,10 +78,18 @@ public class VehicleFormPage extends BasePage {
     public void setDateOfManufacture(String date) {
         dateOfManufactureInput.sendKeys(date);
     }
+
     public void pickNumberOfSeatsMenu(String quantity) {
+        wait.until(ExpectedConditions.visibilityOf(modelMenu));
         Select numberOfSeatsSelect = new Select(numberOfSeatsMenu);
         numberOfSeatsSelect.selectByValue(quantity);
     }
+    public void pickNumberOfSeatsForMotorcycleMenu(String quantity) {
+        wait.until(ExpectedConditions.visibilityOf(numberOfSeatsForMotorcycleMenu));
+        Select numberOfSeatsForMotorcycleSelect = new Select(numberOfSeatsForMotorcycleMenu);
+        numberOfSeatsForMotorcycleSelect.selectByValue(quantity);
+    }
+
     public void pickFuelType(String type) {
         Select fuelSelect = new Select(fuelMenu);
         fuelSelect.selectByValue(type);
