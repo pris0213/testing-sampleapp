@@ -23,6 +23,7 @@ Feature: Send Quote
     | brand         | model   | cylinder_capacity | engine_performance | date_of_manufacture | number_of_seats | number_of_seats_motorcycle | fuel_type      | payload | total_weight | list_price | annual_mileage |
     | Mercedes Benz | Scooter | 10                | 10                 | 03/02/2021          | 2               | 1                          | Electric Power | 100     | 500          | 1000       | 1000           |
 
+
   @Functional
   Scenario Outline: Fill insurant form and move to the next step
     Given User is at the "Insurant" form

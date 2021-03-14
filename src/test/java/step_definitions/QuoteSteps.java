@@ -21,6 +21,7 @@ import static constants.QuoteConstants.PRODUCT;
 import static constants.QuoteConstants.QUOTE;
 import static constants.QuoteConstants.VEHICLE;
 
+
 public class QuoteSteps {
     public static WebDriver webDriver;
     public static VehicleFormPage vehicleFormPage;
@@ -50,9 +51,8 @@ public class QuoteSteps {
     /* Common Steps */
     @Given("User is at the {string} form")
     public void userIsAtPage(String page) {
-        if (page.equals(VEHICLE)) {
+        if (page.equals(VEHICLE))
             vehicleFormPage.goToVehiclePage();
-        }
 
         assert isAtPage(page);
     }
@@ -243,7 +243,6 @@ public class QuoteSteps {
 
     @Then("A confirmation message is displayed")
     public void aConfirmationMessageIsDisplayed() {
-//        quotePage.isConfirmationAlertVisible();
         assert quotePage.isEmailSent();
     }
 
