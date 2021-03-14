@@ -5,8 +5,8 @@ Feature: Send Quote
   Scenario Outline: Fill vehicle form and move to the next step
     Given User is at the "Vehicle" form
     When User chooses brand "<brand>"
-    When User chooses the model "<model>"
-    When User chooses the cylinder capacity "<cylinder_capacity>"
+    And User chooses the model "<model>"
+    And User chooses the cylinder capacity "<cylinder_capacity>"
     And User enters the engine performance "<engine_performance>"
     And User enters the date of manufacture "<date_of_manufacture>"
     And User picks the number of seats "<number_of_seats>"

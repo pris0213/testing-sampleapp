@@ -86,12 +86,12 @@ public class QuoteSteps {
         vehicleFormPage.pickBrand(brand);
     }
 
-    @When("User chooses the model {string}")
+    @And("User chooses the model {string}")
     public void userChoosesTheModel(String model) {
         vehicleFormPage.pickModel(model);
     }
 
-    @When("User chooses the cylinder capacity {string}")
+    @And("User chooses the cylinder capacity {string}")
     public void userChoosesTheCylinderCapacity(String capacity) {
         vehicleFormPage.setCylinderCapacity(capacity);
     }
