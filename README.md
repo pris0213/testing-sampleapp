@@ -18,5 +18,13 @@ To run the tests, run the command bellow on your terminal:
 $ mvn test
 ```
 
+### Report
 
+After running the test set, the project generates a report inside the "target" folder:
 
+    .
+    ├── ...
+    ├── target 
+    │   ├── ...
+    │   ├── cucumber-report.html
+    └── ...
