@@ -76,7 +76,7 @@ Feature: Send Quote
     And User enters their password "<password>"
     And User confirms their password "<password>"
     And User sends the quote
-    Then A confirmation message is displayed
+    Then The message "Sending e-mail success!" is displayed
 
     Examples:
       | email            | username      | password   |

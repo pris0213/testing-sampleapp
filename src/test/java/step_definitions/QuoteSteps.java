@@ -241,9 +241,10 @@ public class QuoteSteps {
         quotePage.sendQuote();
     }
 
-    @Then("A confirmation message is displayed")
-    public void aConfirmationMessageIsDisplayed() {
-        assert quotePage.isEmailSent();
+    @Then("The message {string} is displayed")
+    public void theMessageIsDisplayed(String message) {
+        assert quotePage.isMessageDisplayed(message);
+
     }
 
     /* Class methods */

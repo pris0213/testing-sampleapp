@@ -17,10 +17,8 @@ public class QuotePage extends BasePage {
     private WebElement confirmPasswordInput;
     @FindBy(id = "sendemail")
     private WebElement sendBtn;
-    @FindBy(css = ".showSweetAlert")
-    private WebElement confirmationAlert;
-    @FindBy(css = ".sa-success")
-    private WebElement successIcon;
+    @FindBy(css = "body > div.sweet-alert.showSweetAlert.visible > h2")
+    private WebElement messageText;
 
     public QuotePage(WebDriver webDriver, String title) {
         super(webDriver, title);
@@ -47,14 +45,9 @@ public class QuotePage extends BasePage {
         sendBtn.click();
     }
 
-    public boolean isConfirmationAlertVisible() {
-        wait.until(ExpectedConditions.visibilityOf(confirmationAlert));
-        return confirmationAlert.isDisplayed();
-    }
-
-    public boolean isEmailSent() {
-        wait.until(ExpectedConditions.visibilityOf(successIcon));
-        return successIcon.isDisplayed();
+    public boolean isMessageDisplayed(String message) {
+        wait.until(ExpectedConditions.visibilityOf(messageText));
+        return messageText.getText().equals(message);
     }
 
 }
