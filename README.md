@@ -9,7 +9,7 @@ This project tests the Sample App 'Send Quote' feature as a challenge for a job 
 * Follow the steps bellow:
   * Enter [Sample App](http://sampleapp.tricentis.com/101/app.php);
   * Fill all 5 forms;
-  * Verify the "Sending e-mail success!" message on the screen.
+  * Verify that the "Sending e-mail success!" message is displayed.
   
 ## Tests
 
